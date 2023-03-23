@@ -1,3 +1,4 @@
+from django import VERSION
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
@@ -9,7 +10,7 @@ class BaseYarnCommand(BaseCommand):
     """
     Base management command with yarn support.
     """
-    requires_system_checks = False
+    requires_system_checks = False if VERSION < (4, 1, 0) else []
 
     def handle(self, *args, **options):
         self._check_yarn_exists()
